@@ -8,6 +8,10 @@ public class Contact {
 	private String phoneNo;
 	private String email;
 	
+	public Contact() {
+		
+	}
+	
 	public Contact(String firstName,String lastName,String address,String zip,String phoneNo,String email){
 		setFirstName(firstName);
 		setLastName(lastName);
