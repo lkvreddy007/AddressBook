@@ -2,7 +2,7 @@ package com.org.capg;
 
 import java.util.*;
 
-public class AddressBookMain extends Contact{
+class AddressBookMain extends Contact{
 	private List<Contact> addressBook=new ArrayList<Contact>();
 	static Scanner sc = new Scanner(System.in); 
 	
@@ -100,8 +100,7 @@ public class AddressBookMain extends Contact{
 		}
 	}
 	
-	public static void main(String[] args) {
-		AddressBookMain abm=new AddressBookMain();
+	public List<Contact> addressBookCreator() {
 		String firstName,lastName,address,zip,phoneNo,email;
 		System.out.println("Welcome to Address Book");
 		boolean exit=true;
@@ -130,28 +129,28 @@ public class AddressBookMain extends Contact{
 					System.out.println("Enter Email Id:");
 					email= sc.nextLine();
 					Contact con=new Contact(firstName, lastName, address, zip, phoneNo, email);
-					abm.addContact(con);
+					addContact(con);
 					System.out.println("Contact Details you have entered are: ");
-					abm.displayContact(con);
+					displayContact(con);
 					break;
 			
 				case 2:
 					System.out.println("Enter the lastname of contact to edit: ");
 					String lname=sc.nextLine();
-					abm.editContactGivenLastName(lname);
+					editContactGivenLastName(lname);
 					break;
 					
 				case 3:
 					System.out.println("Enter the lastname of contact to delete: ");
 					String delLastname=sc.nextLine();
-					boolean b=abm.removeContact(delLastname);
+					boolean b=removeContact(delLastname);
 					if(b) {
 						System.out.println("Contact Deleted.");
 					}
 					break;
 					
 				case 4:
-					abm.displayAllContacts();
+					displayAllContacts();
 					break;
 				
 				case 5:
@@ -161,6 +160,7 @@ public class AddressBookMain extends Contact{
 				default:
 					System.out.println("Enter number between 1 to 5");
 			}
-		}	
+		}
+		return addressBook;
 	}
 }
