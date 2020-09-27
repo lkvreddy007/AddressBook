@@ -152,6 +152,7 @@ public class AddressBookMain extends Contact{
 					
 				case 4:
 					abm.displayAllContacts();
+					break;
 				
 				case 5:
 					exit=false;
