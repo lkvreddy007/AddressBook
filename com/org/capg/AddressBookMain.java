@@ -62,8 +62,10 @@ public class AddressBookMain extends Contact{
 				}
 				System.out.println("Contact details after edit are: ");
 				displayContact(c);
+				return;
 			}
 		}
+		System.out.println("Contact with "+lastName+" doesnot exist.");
 	}
 	
 	public void displayContact(Contact obj) {
@@ -73,6 +75,16 @@ public class AddressBookMain extends Contact{
 		System.out.println("Zip: "+obj.getZip());
 		System.out.println("Phone Number: "+obj.getPhoneNo());
 		System.out.println("Email Id: "+obj.getEmail());
+	}
+	
+	public boolean removeContact(String lastname) {
+		for(Contact c:addressBook) {
+			if(lastname.equals(c.getLastName())) {
+				addressBook.remove(c);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public static void main(String[] args) {
@@ -99,8 +111,15 @@ public class AddressBookMain extends Contact{
 		abm.displayContact(con);
 		
 		
-		System.out.println("Enter the lastname of contact to edit");
+		System.out.println("Enter the lastname of contact to edit: ");
 		String lname=sc.nextLine();
 		abm.editContactGivenLastName(lname);
+		
+		System.out.println("Enter the lastname of contact to delete: ");
+		String delLastname=sc.nextLine();
+		boolean b=abm.removeContact(delLastname);
+		if(b) {
+			System.out.println("Contact Deleted.");
+		}
 	}
 }
