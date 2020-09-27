@@ -13,7 +13,6 @@ public class AddressBookMain extends Contact{
 	
 	public void editContactGivenLastName(String lastName) {
 		boolean exitFlag=true;
-		System.out.println("Entered edit section");
 		for(Contact c:addressBook) {
 			if(c.getLastName().equals(lastName)) {
 				while(exitFlag) {	
@@ -55,9 +54,14 @@ public class AddressBookMain extends Contact{
 							String mail = sc.nextLine();
 							c.setEmail(mail);
 							break;
+							
 						case 7:
 							System.out.println("Exiting edit section");
 							exitFlag=false;
+							break;
+							
+						default:
+							System.out.println("Enter number from 1 to 7");
 					}
 				}
 				System.out.println("Contact details after edit are: ");
@@ -87,39 +91,76 @@ public class AddressBookMain extends Contact{
 		return false;
 	}
 	
+	public void displayAllContacts() {
+		int i=1;
+		for(Contact c:addressBook) {
+			System.out.println("Contact "+i+":");
+			displayContact(c);
+			System.out.println("\n");
+		}
+	}
+	
 	public static void main(String[] args) {
 		AddressBookMain abm=new AddressBookMain();
 		String firstName,lastName,address,zip,phoneNo,email;
 		System.out.println("Welcome to Address Book");
-
-		System.out.println("Enter First Name:");
-		firstName = sc.nextLine();
-		System.out.println("Enter Last Name:");
-		lastName = sc.nextLine();
-		System.out.println("Enter the Address:");
-		address= sc.nextLine();
-		System.out.println("Enter Zip Code:");
-		zip= sc.nextLine();
-		System.out.println("Enter Phone Number:");
-		phoneNo= sc.nextLine();
-		System.out.println("Enter Email Id:");
-		email= sc.nextLine();
-		
-		Contact con=new Contact(firstName, lastName, address, zip, phoneNo, email);
-		abm.addContact(con);
-		System.out.println("Contact Details you have entered are: ");
-		abm.displayContact(con);
-		
-		
-		System.out.println("Enter the lastname of contact to edit: ");
-		String lname=sc.nextLine();
-		abm.editContactGivenLastName(lname);
-		
-		System.out.println("Enter the lastname of contact to delete: ");
-		String delLastname=sc.nextLine();
-		boolean b=abm.removeContact(delLastname);
-		if(b) {
-			System.out.println("Contact Deleted.");
-		}
+		boolean exit=true;
+		int choice=0;
+		while(exit) {
+			System.out.println("\nList of Functionalities:");
+			System.out.println("1.Add Contact");
+			System.out.println("2.Edit Contact");
+			System.out.println("3.Delete Contact");
+			System.out.println("4.Display all contacts in Address Book");
+			System.out.println("5.Exit");
+			System.out.println("Enter your choice");
+			choice=Integer.parseInt(sc.nextLine());
+			switch (choice) {
+				case 1:
+					System.out.println("Enter First Name:");
+					firstName = sc.nextLine();
+					System.out.println("Enter Last Name:");
+					lastName = sc.nextLine();
+					System.out.println("Enter the Address:");
+					address= sc.nextLine();
+					System.out.println("Enter Zip Code:");
+					zip= sc.nextLine();
+					System.out.println("Enter Phone Number:");
+					phoneNo= sc.nextLine();
+					System.out.println("Enter Email Id:");
+					email= sc.nextLine();
+					Contact con=new Contact(firstName, lastName, address, zip, phoneNo, email);
+					abm.addContact(con);
+					System.out.println("Contact Details you have entered are: ");
+					abm.displayContact(con);
+					break;
+			
+				case 2:
+					System.out.println("Enter the lastname of contact to edit: ");
+					String lname=sc.nextLine();
+					abm.editContactGivenLastName(lname);
+					break;
+					
+				case 3:
+					System.out.println("Enter the lastname of contact to delete: ");
+					String delLastname=sc.nextLine();
+					boolean b=abm.removeContact(delLastname);
+					if(b) {
+						System.out.println("Contact Deleted.");
+					}
+					break;
+					
+				case 4:
+					abm.displayAllContacts();
+					break;
+				
+				case 5:
+					exit=false;
+					break;
+					
+				default:
+					System.out.println("Enter number between 1 to 5");
+			}
+		}	
 	}
 }
