@@ -2,7 +2,7 @@ package com.org.capg;
 
 import java.util.*;
 
-public class AddressBookMain extends Contact{
+public class AddressBookMain{
 	private List<Contact> addressBook=new ArrayList<Contact>();
 	
 	public void addContact(Contact obj) {
