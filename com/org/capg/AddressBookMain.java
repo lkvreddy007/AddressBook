@@ -2,7 +2,6 @@ package com.org.capg;
 
 import java.util.*;
 
-
 public class AddressBookMain {
 	private List<Contact> addressBook=new ArrayList<Contact>();
 	static Scanner sc = new Scanner(System.in); 
