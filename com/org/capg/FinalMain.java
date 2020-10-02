@@ -23,7 +23,7 @@ public class FinalMain {
 		}
 	}
 	
-	public static void makeCityContactsDict(String cityName) {
+	public static List<Contact> makeCityContactsDict(String cityName) {
 		List<String> cities=new ArrayList<String>();
 		for(List<Contact> list:shelf.values()) {
 			for(Contact c:list){
@@ -45,9 +45,8 @@ public class FinalMain {
 			cityContactDict.put(city,matchingObj);
 		}
 		List<Contact> l=cityContactDict.get(cityName);
-		for(Contact con:l) {
-			System.out.println(con.getFirstName()+" "+con.getLastName());
-		}
+		return l;
+		
 	}
 	
 	public static void main(String[] args) {
@@ -93,11 +92,23 @@ public class FinalMain {
 					String city= sc.nextLine();
 					searchPersonInAState(city);
 					break;
+				
 				case 4:
 					System.out.println("Enter city name to display contacts");
 					String cityName=sc.nextLine();
-					makeCityContactsDict(cityName);
+					List<Contact> l=makeCityContactsDict(cityName);
+					for(Contact con:l) {
+						System.out.println(con.getFirstName()+" "+con.getLastName());
+					}
+					break;
+				
 				case 5:
+					System.out.println("Enter the city to find number of contacts");
+					String cityname=sc.nextLine();
+					List<Contact> list=makeCityContactsDict(cityname);
+					System.out.println(list.size());
+					
+				case 6:
 					exit=false;
 					break;
 					
