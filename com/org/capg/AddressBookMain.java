@@ -1,14 +1,24 @@
 package com.org.capg;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 class AddressBookMain {
 	private List<Contact> addressBook=new ArrayList<Contact>();
 	static Scanner sc = new Scanner(System.in); 
 	
 	public void addContact(Contact obj) {
-		this.addressBook.add(obj);
-		System.out.println("Contact added to Address Book");
+		List<Contact> matchingobj=addressBook.stream()
+								  .filter(a->a.getLastName().equals(obj.getLastName()))
+								  .collect(Collectors.toList());
+		if(matchingobj.size()==0) {
+			this.addressBook.add(obj);
+			System.out.println("Contact added to Address Book");
+		}
+		else {
+			System.out.println("Contact with same name exists\n");
+		}
 	}
 	
 	public void editContactGivenLastName(String lastName) {
@@ -106,7 +116,7 @@ class AddressBookMain {
 		boolean exit=true;
 		int choice=0;
 		while(exit) {
-			System.out.println("\nList of Functionalities:");
+			System.out.println("List of Functionalities:");
 			System.out.println("1.Add Contact");
 			System.out.println("2.Edit Contact");
 			System.out.println("3.Delete Contact");
