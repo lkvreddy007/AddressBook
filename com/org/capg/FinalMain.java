@@ -107,6 +107,7 @@ public class FinalMain {
 					String cityname=sc.nextLine();
 					List<Contact> list=makeCityContactsDict(cityname);
 					System.out.println(list.size());
+					break;
 					
 				case 6:
 					exit=false;
