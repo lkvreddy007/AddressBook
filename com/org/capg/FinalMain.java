@@ -17,7 +17,6 @@ public class FinalMain {
 			int check=Integer.parseInt(sc.nextLine());
 			switch(check){
 				case 1:
-					addressBook = abm.addressBookCreator();
 					boolean a=true;
 					String name="";
 					while(a) {
@@ -27,6 +26,7 @@ public class FinalMain {
 							System.out.println("Key already exists.");
 						} 
 						else {
+							addressBook = abm.addressBookCreator();
 							shelf.put(name, addressBook);
 							System.out.println("Address book added to shelf");
 							a=false;
