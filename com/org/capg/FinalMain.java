@@ -57,7 +57,8 @@ public class FinalMain {
 			System.out.println("2.Display names of all address books in shelf");
 			System.out.println("3.Display contacts by City/State across multiple Address Books");
 			System.out.println("4.Display contacts by City/State using Dictionary");
-			System.out.println("5.Exit");
+			System.out.Println("5.Display Number of Contacts given City");
+			System.out.println("6.Exit");
 			System.out.println("Enter your choice");
 			int check=Integer.parseInt(sc.nextLine());
 			switch(check){
