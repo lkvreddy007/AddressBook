@@ -6,19 +6,47 @@ import java.util.stream.Collectors;
 public class FinalMain {
 	static AddressBookMain abm=new AddressBookMain();
 	static HashMap<String, List<Contact>> shelf=new HashMap<>();
+	static HashMap<String,List<Contact>> cityContactDict=new HashMap<>();
 	private static List<Contact> addressBook=new ArrayList<Contact>();
 	static Scanner sc=new Scanner(System.in);
 	
 	public static void searchPersonInAState(String city){
-		List<Contact> matchingobj=new ArrayList<Contact>();
+		List<Contact> matchingObj=new ArrayList<Contact>();
 		for(List<Contact> li:shelf.values()) {
-			matchingobj=li.stream()
+			matchingObj=li.stream()
 				  .filter(a->a.getAddress().equals(city))
 				  .collect(Collectors.toList());
 		}
 		System.out.println("Contacts from "+city+" are :");
-		for(Contact c:matchingobj) {
+		for(Contact c:matchingObj) {
 			System.out.println(c.getFirstName()+c.getLastName());
+		}
+	}
+	
+	public static void makeCityContactsDict(String cityName) {
+		List<String> cities=new ArrayList<String>();
+		for(List<Contact> list:shelf.values()) {
+			for(Contact c:list){
+				if(cities.contains(c.getAddress())) {
+					
+				}
+				else {
+					cities.add(c.getAddress());
+				}
+			}
+		}
+		List<Contact> matchingObj=new ArrayList<Contact>();
+		for(String city:cities) {
+			for(List<Contact> li:shelf.values()) {
+				matchingObj=li.stream()
+				  .filter(a->a.getAddress().equals(city))
+				  .collect(Collectors.toList());
+			}
+			cityContactDict.put(city,matchingObj);
+		}
+		List<Contact> l=cityContactDict.get(cityName);
+		for(Contact con:l) {
+			System.out.println(con.getFirstName()+" "+con.getLastName());
 		}
 	}
 	
@@ -29,7 +57,8 @@ public class FinalMain {
 			System.out.println("1.Add Address Book to Shelf");
 			System.out.println("2.Display names of all address books in shelf");
 			System.out.println("3.Display contacts by City/State across multiple Address Books");
-			System.out.println("4.Exit");
+			System.out.println("4.Display contacts by City/State using Dictionary");
+			System.out.println("5.Exit");
 			System.out.println("Enter your choice");
 			int check=Integer.parseInt(sc.nextLine());
 			switch(check){
@@ -60,16 +89,20 @@ public class FinalMain {
 					break;
 					
 				case 3:
-					System.out.println("Enter City name to search contacts");
+					System.out.println("Enter city name to display contacts");
 					String city= sc.nextLine();
 					searchPersonInAState(city);
 					break;
 				case 4:
+					System.out.println("Enter city name to display contacts");
+					String cityName=sc.nextLine();
+					makeCityContactsDict(cityName);
+				case 5:
 					exit=false;
 					break;
 					
 				default:
-					System.out.println("Enter either 1 or 2 or 3");
+					System.out.println("Enter between 1 to 5");
 			}
 		}
 	}
